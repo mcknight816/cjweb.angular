@@ -6,11 +6,11 @@ import {catchError, map, tap} from "rxjs/operators";
 const endpoint = 'http://localhost:8080/mongo/library/';
 const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json',
-    'Access-Control-Allow-Origin': '*'
+    'access-control-allow-origin':'*',
+    'content-type':  'application/json'
   })
 };
-
+//'Access-Control-Allow-Origin': '*'
 @Injectable({
   providedIn: 'root'
 })
@@ -37,26 +37,24 @@ export class BaseService {
         map(this.extractData));
   }
 
-
-  add(product): Observable<any> {
-    console.log(product);
-    return this.http.post<any>(endpoint + this.entityName, JSON.stringify(product), httpOptions).pipe(
-        tap((product) => console.log(`added ${this.entityName} w/ id=${product.id}`)),
-        catchError(this.handleError<any>('add '))
+  save(entity): Observable<any> {
+    return this.http.post<any>(endpoint + this.entityName, JSON.stringify(entity), httpOptions).pipe(
+        tap((entity) => console.log(`saved ${this.entityName} w/ id=${entity._id}`)),
+        catchError(this.handleError<any>('save '))
     );
   }
 
-  update(id, product): Observable<any> {
-    return this.http.put(endpoint + this.entityName + '/' + id, JSON.stringify(product), httpOptions).pipe(
+  update(id, entity): Observable<any> {
+    return this.http.put(endpoint + this.entityName + '/' + id, JSON.stringify(entity), httpOptions).pipe(
         tap(_ => console.log(`updated ${this.entityName} id=${id}`)),
-        catchError(this.handleError<any>('updateProduct'))
+        catchError(this.handleError<any>('updateEntity'))
     );
   }
 
   delete (id): Observable<any> {
     return this.http.delete<any>(endpoint + this.entityName + '/' + id, httpOptions).pipe(
         tap(_ => console.log(`deleted ${this.entityName} id=${id}`)),
-        catchError(this.handleError<any>('deleteProduct'))
+        catchError(this.handleError<any>('deleteEntity'))
     );
   }
   private handleError<T> (operation = 'operation', result?: T) {

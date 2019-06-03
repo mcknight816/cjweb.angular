@@ -3,18 +3,12 @@
   <li *ngFor="let book of books"
       [class.selected]="book === selectedBook"
       (click)="onSelect(book)">
-    <span class="badge">{{book.author}}</span> {{book.title}}
+    <span class="badge">*</span> <a class="text" >{{book.author}} {{book.title}}</a>
   </li>
 </ul>
 <div *ngIf="selectedBook">
-  <h2>{{selectedBook.name | uppercase}} Details</h2>
-  <div><span>isbn: </span>{{selectedBook.isbn}}</div>
-  <div>
-    <label>Title:
-       <input [(ngModel)]="selectedBook.title" placeholder="title"/>
-    </label>
-    <label>Author:
-      <input [(ngModel)]="selectedBook.author" placeholder="author"/>
-    </label>
-  </div>
+  <app-book-detail [book]="selectedBook"></app-book-detail>
+  <button (click)="save()">Save</button>
+
 </div>
+

@@ -7,6 +7,9 @@ import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { HttpClientModule} from "@angular/common/http";
+import { BookDetailComponent } from './book-detail/book-detail.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -15,13 +18,18 @@ import { HttpClientModule} from "@angular/common/http";
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: BookListComponent },
+      { path: '', component: HomeComponent },
+      { path: 'book', component: BookListComponent },
+      { path: 'book/edit', component: BookDetailComponent },
     ])
   ],
   declarations: [
     AppComponent,
     TopBarComponent,
-    BookListComponent
+    BookListComponent,
+    BookDetailComponent,
+    ProductListComponent,
+    HomeComponent
   ],
   bootstrap: [ AppComponent ]
 })
