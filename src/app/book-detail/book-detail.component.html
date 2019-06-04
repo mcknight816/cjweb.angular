@@ -1,0 +1,11 @@
+<h2>{{book.title | uppercase}} Details</h2>
+<div><span>isbn: </span>{{book.isbn}}</div>
+<div>
+  <label>Title:
+    <input [(ngModel)]="book.title" placeholder="title"/>
+  </label>
+  <label>Author:
+    <input [(ngModel)]="book.author" placeholder="author"/>
+  </label>
+</div>
+
