@@ -11,6 +11,8 @@ export class BookListComponent implements OnInit {
   selectedBook :any;
   books = [];
   constructor(private bs:BooksService) { this.list();}
+  ngOnInit() {
+  }
 
   list(){
     this.bs.list().subscribe((data)=>{
@@ -18,16 +20,13 @@ export class BookListComponent implements OnInit {
     });
   }
   onSelect(book){
-    console.log(book);
     this.selectedBook = book;
   }
-  ngOnInit() {
-  }
+
   save(){
     this.bs.save(this.selectedBook).subscribe((data)=>{
       this.selectedBook = null;
     });
-    //this.selectedBook = null;
   }
 
 }
