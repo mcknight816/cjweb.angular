@@ -1,15 +1,15 @@
-<h2>My Books<span><button (click)="add()" class="add-button" >Add</button></span></h2>
+<h2>My Books<span><button *ngIf="!selectedBook" (click)="add()" class="add-button" >Add</button></span></h2>
 
-<div *ngIf="newBook">
-    <app-book-detail [book]="newBook"></app-book-detail>
-    <button (click)="create()">Save</button>
+<div *ngIf="selectedBook">
+    <app-book-detail [book]="selectedBook"></app-book-detail>
+    <button   (click)="cancel()">Cancel</button>
+    <button   (click)="save()">Save</button>
 </div>
-<div *ngIf="!newBook">
+<div *ngIf="!selectedBook">
     <form style="margin-left: 10px">
         <input  style="width:75%" type="search" [(ngModel)]="searchText" (ngModelChange)="list()" name="searchText" placeholder="Search">
         <button (click)="list()">Search</button>
     </form>
-
     <ul class="books">
         <li *ngFor="let book of books"
             [class.selected]="book === selectedBook"
@@ -17,10 +17,6 @@
             <span class="badge">*</span> <a class="text" >{{book.author}} {{book.title}}</a>
         </li>
     </ul>
-    <div *ngIf="selectedBook">
-        <app-book-detail [book]="selectedBook"></app-book-detail>
-        <button (click)="save()">Save</button>
-    </div>
 </div>
 
 
