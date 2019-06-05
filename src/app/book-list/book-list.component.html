@@ -1,6 +1,6 @@
 <h2>My Books</h2>
 <form style="margin-left: 10px">
-  <input style="width:75%" type="search" [(ngModel)]="searchText" name="searchText" placeholder="Search">
+  <input  style="width:75%" type="search" [(ngModel)]="searchText" (ngModelChange)="list()" name="searchText" placeholder="Search">
   <button (click)="list()">Search</button>
 </form>
 <ul class="books">
