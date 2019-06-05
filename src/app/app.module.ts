@@ -8,7 +8,7 @@ import { TopBarComponent } from './top-bar/top-bar.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { HttpClientModule} from "@angular/common/http";
 import { BookDetailComponent } from './book-detail/book-detail.component';
-import { ProductListComponent } from './product-list/product-list.component';
+
 import { HomeComponent } from './home/home.component';
 
 
@@ -29,7 +29,6 @@ import { HomeComponent } from './home/home.component';
     TopBarComponent,
     BookListComponent,
     BookDetailComponent,
-    ProductListComponent,
     HomeComponent
   ],
   bootstrap: [ AppComponent ]

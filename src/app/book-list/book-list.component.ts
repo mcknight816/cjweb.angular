@@ -11,11 +11,20 @@ export class BookListComponent implements OnInit {
   selectedBook :any;
   books = [];
   searchText:String;
-
+  newBook :any;
   constructor(private bs:BooksService) { this.list();}
     ngOnInit() {
   }
 
+  add(){
+      this.newBook = {};
+  }
+  create(){
+        this.bs.save(this.newBook).subscribe((data)=>{
+            this.newBook = null;
+            this.list();
+        });
+   }
   list(){
      let query:any = {};
      if(this.searchText){
