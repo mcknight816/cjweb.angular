@@ -27,8 +27,12 @@ export class BaseService {
     return body || { };
   }
 
-  list(): Observable<any> {
-    return this.http.get(endpoint + this.entityName).pipe(
+  list(q:any): Observable<any> {
+    let queryParams = '';
+    if(q){
+      queryParams = "?q=" + encodeURIComponent(JSON.stringify(q));
+    }
+    return this.http.get(endpoint + this.entityName + queryParams).pipe(
         map(this.extractData));
   }
 

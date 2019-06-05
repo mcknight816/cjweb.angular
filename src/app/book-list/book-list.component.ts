@@ -10,12 +10,18 @@ export class BookListComponent implements OnInit {
 
   selectedBook :any;
   books = [];
+  searchText:String;
+
   constructor(private bs:BooksService) { this.list();}
-  ngOnInit() {
+    ngOnInit() {
   }
 
   list(){
-    this.bs.list().subscribe((data)=>{
+     let query:any = {};
+     if(this.searchText){
+       query['title'] =  { '$regex': this.searchText + ".*"};
+     }
+    this.bs.list(query).subscribe((data)=>{
             this.books = data.rows;
     });
   }
