@@ -6,7 +6,7 @@
     <button   (click)="save()">Save</button>
 </div>
 <div *ngIf="!selectedBook">
-    <app-search-box (searchTerm)="list($event)"></app-search-box>
+    <app-search-box (searchTerm)="search($event)"></app-search-box>
     <ul class="books">
         <li *ngFor="let book of books"
             [class.selected]="book === selectedBook"

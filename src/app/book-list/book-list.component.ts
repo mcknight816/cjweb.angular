@@ -11,7 +11,7 @@ export class BookListComponent implements OnInit {
   selectedBook :any;
   books = [];
 
-  constructor(private bs:BooksService) { this.list(null);}
+  constructor(private bs:BooksService) { this.search();}
     ngOnInit() {
   }
   add(){
@@ -20,8 +20,8 @@ export class BookListComponent implements OnInit {
   cancel(){
       this.selectedBook = null;
   }
-  list(searchTerm){
-      console.log(searchTerm);
+
+  search(searchTerm = null){
      let query:any = {};
      if(searchTerm){
 
@@ -39,7 +39,7 @@ export class BookListComponent implements OnInit {
          query['$or'].push(isbn_query);
          //query['title'] =  { '$regex': this.searchText + ".*"};
      }
-    this.bs.list(query).subscribe((data)=>{
+     this.bs.list(query).subscribe((data)=>{
             this.books = data.rows;
     });
   }
@@ -50,7 +50,7 @@ export class BookListComponent implements OnInit {
   save(){
     this.bs.save(this.selectedBook).subscribe((data)=>{
       this.selectedBook = null;
-      this.list(null);
+      this.search();
     });
   }
 

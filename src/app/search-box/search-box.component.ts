@@ -10,7 +10,7 @@ export class SearchBoxComponent implements OnInit {
   searchText:string;
   constructor() { }
 
-  searchTermChanged() {
+  search(){
     this.searchTerm.emit(this.searchText);
   }
 

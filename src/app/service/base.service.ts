@@ -24,7 +24,7 @@ export class BaseService {
 
   private extractData(res: Response):object {
     let body = res;
-    return body || { };
+    return body || {};
   }
 
   list(q:any): Observable<any> {
