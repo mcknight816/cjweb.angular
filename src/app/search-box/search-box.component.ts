@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Subject} from "rxjs";
 import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
@@ -16,13 +16,14 @@ export class SearchBoxComponent implements OnInit {
     this.searchTermChanged.pipe(
         debounceTime(1000),
         distinctUntilChanged()
-    ).subscribe(model => {
-        if(model.length > 2 || model.length < 1){
-            this.searchTerm = model;
+    ).subscribe(searchTerm => {
+        if(searchTerm.length > 2 || searchTerm.length < 1){
+            this.searchTerm = searchTerm;
             this.search();
         }
     });
   }
+
   onSearchTermChange(){
     this.searchTermChanged.next(this.searchTerm);
   }
