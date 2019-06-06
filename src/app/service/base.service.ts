@@ -17,12 +17,12 @@ const httpOptions = {
 export class BaseService {
   entityName = null;
   http:HttpClient;
-  constructor(entity: String , http: HttpClient) {
+  constructor(entity: string , http: HttpClient) {
     this.entityName = entity;
     this.http = http;
   }
 
-  private extractData(res: Response) {
+  private extractData(res: Response):object {
     let body = res;
     return body || { };
   }
@@ -54,22 +54,19 @@ export class BaseService {
         catchError(this.handleError<any>('updateEntity'))
     );
   }
-
   delete (id): Observable<any> {
     return this.http.delete<any>(endpoint + this.entityName + '/' + id, httpOptions).pipe(
         tap(_ => console.log(`deleted ${this.entityName} id=${id}`)),
         catchError(this.handleError<any>('deleteEntity'))
     );
   }
-  private handleError<T> (operation = 'operation', result?: T) {
+  private handleError<T> (operation = 'operation', result?: T){
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
       console.log(`${operation} failed: ${error.message}`);
-
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };

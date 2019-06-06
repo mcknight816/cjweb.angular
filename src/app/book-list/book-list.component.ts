@@ -10,9 +10,8 @@ export class BookListComponent implements OnInit {
 
   selectedBook :any;
   books = [];
-  searchText:String;
 
-  constructor(private bs:BooksService) { this.list();}
+  constructor(private bs:BooksService) { this.list(null);}
     ngOnInit() {
   }
   add(){
@@ -21,17 +20,18 @@ export class BookListComponent implements OnInit {
   cancel(){
       this.selectedBook = null;
   }
-  list(){
+  list(searchTerm){
+      console.log(searchTerm);
      let query:any = {};
-     if(this.searchText){
+     if(searchTerm){
 
          let title_query = {};
          let author_query = {};
          let isbn_query = {};
 
-         title_query['title'] = {'$regex': this.searchText + ".*", '$options' : 'i'};   //case insensitive title starts with
-         author_query['author'] = {'$regex': this.searchText + ".*",'$options' : 'i'};  //case insensitive author starts with
-         isbn_query['isbn'] = {'$regex': this.searchText + ".*"};                       //case sensitive isbn starts with
+         title_query['title'] = {'$regex': searchTerm + ".*", '$options' : 'i'};   //case insensitive title starts with
+         author_query['author'] = {'$regex': searchTerm + ".*",'$options' : 'i'};  //case insensitive author starts with
+         isbn_query['isbn'] = {'$regex': searchTerm + ".*"};                       //case sensitive isbn starts with
 
          query['$or'] = []; //or the queries
          query['$or'].push(title_query);
@@ -50,7 +50,7 @@ export class BookListComponent implements OnInit {
   save(){
     this.bs.save(this.selectedBook).subscribe((data)=>{
       this.selectedBook = null;
-      this.list();
+      this.list(null);
     });
   }
 

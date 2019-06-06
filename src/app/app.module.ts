@@ -10,6 +10,7 @@ import { HttpClientModule} from "@angular/common/http";
 import { BookDetailComponent } from './book-detail/book-detail.component';
 
 import { HomeComponent } from './home/home.component';
+import { SearchBoxComponent } from './search-box/search-box.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { HomeComponent } from './home/home.component';
     TopBarComponent,
     BookListComponent,
     BookDetailComponent,
-    HomeComponent
+    HomeComponent,
+    SearchBoxComponent
   ],
   bootstrap: [ AppComponent ]
 })

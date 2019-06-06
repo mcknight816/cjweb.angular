@@ -6,10 +6,7 @@
     <button   (click)="save()">Save</button>
 </div>
 <div *ngIf="!selectedBook">
-    <form style="margin-left: 10px">
-        <input  style="width:75%" type="search" [(ngModel)]="searchText" (ngModelChange)="list()" name="searchText" placeholder="Search">
-        <button (click)="list()">Search</button>
-    </form>
+    <app-search-box (searchTerm)="list($event)"></app-search-box>
     <ul class="books">
         <li *ngFor="let book of books"
             [class.selected]="book === selectedBook"

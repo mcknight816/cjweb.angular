@@ -1,0 +1,4 @@
+<form class='search-box' style="margin-left: 10px">
+  <input   type="search" [(ngModel)]="searchText" (ngModelChange)="searchTermChanged()" name="searchText" placeholder="Search">
+  <button (click)="searchTermChanged()">Search</button>
+</form>
