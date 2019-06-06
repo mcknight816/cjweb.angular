@@ -17,8 +17,10 @@ export class SearchBoxComponent implements OnInit {
         debounceTime(1000),
         distinctUntilChanged()
     ).subscribe(model => {
-        this.searchTerm = model;
-        this.search();
+        if(model.length > 2 || model.length < 1){
+            this.searchTerm = model;
+            this.search();
+        }
     });
   }
   onSearchTermChange(){
