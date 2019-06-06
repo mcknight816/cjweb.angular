@@ -1,4 +1,6 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Subject} from "rxjs";
+import {debounceTime, distinctUntilChanged} from "rxjs/operators";
 
 @Component({
   selector: 'app-search-box',
@@ -6,12 +8,25 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
   styleUrls: ['./search-box.component.css']
 })
 export class SearchBoxComponent implements OnInit {
-  @Output() searchTerm = new EventEmitter<string>();
-  searchText:string;
-  constructor() { }
+  @Output() searchChanged = new EventEmitter<string>();
+  searchTerm:string;
+  searchTermChanged: Subject<string> = new Subject<string>();
+
+  constructor() {
+    this.searchTermChanged.pipe(
+        debounceTime(1000),
+        distinctUntilChanged()
+    ).subscribe(model => {
+        this.searchTerm = model;
+        this.search();
+    });
+  }
+  onSearchTermChange(){
+    this.searchTermChanged.next(this.searchTerm);
+  }
 
   search(){
-    this.searchTerm.emit(this.searchText);
+    this.searchChanged.emit(this.searchTerm);
   }
 
   ngOnInit() {
