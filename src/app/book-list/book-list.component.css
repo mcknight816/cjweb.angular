@@ -47,3 +47,12 @@
 }
 
 .add-button { float:right }
+
+.card{
+    display: block;
+    padding: 5px;
+    margin: 5px;
+    width: 320px;
+    border: 1px solid gray;
+    border-radius: 8px;
+}

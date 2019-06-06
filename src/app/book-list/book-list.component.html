@@ -7,13 +7,12 @@
 </div>
 <div *ngIf="!selectedBook">
     <app-search-box (searchChanged)="search($event)" ></app-search-box>
-    <ul class="books">
-        <li *ngFor="let book of books"
-            [class.selected]="book === selectedBook"
-            (click)="onSelect(book)">
-            <span class="badge">*</span> <a class="text" >{{book.author}} {{book.title}}</a>
-        </li>
-    </ul>
+    <div fxLayout="row wrap">
+        <div class="card" *ngFor="let book of books" [class.selected]="book === selectedBook" (click)="onSelect(book)">
+            <h4>{{book.title}}</h4>
+            Author: <a class="text" >{{book.author}} </a>
+        </div>
+    </div>
 </div>
 
 

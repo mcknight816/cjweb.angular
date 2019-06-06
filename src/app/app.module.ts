@@ -11,11 +11,13 @@ import { BookDetailComponent } from './book-detail/book-detail.component';
 
 import { HomeComponent } from './home/home.component';
 import { SearchBoxComponent } from './search-box/search-box.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 @NgModule({
   imports: [
     BrowserModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
